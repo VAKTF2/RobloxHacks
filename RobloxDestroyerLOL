@@ -1,0 +1,198 @@
+//This is just for fun, not actually hack.
+
+//Step 1: Go to www.roblox.com.
+//Step 2: Right click and press Inspect Element.
+//Step 3: And then press on the button "Console"
+//Step 4: Paste the code in console.
+
+let hackMenu = document.createElement('div');
+hackMenu.style.position = 'fixed';
+hackMenu.style.top = '10%';
+hackMenu.style.left = '10%';
+hackMenu.style.padding = '20px';
+hackMenu.style.backgroundColor = 'black';
+hackMenu.style.color = 'white';
+hackMenu.style.fontFamily = 'Arial, sans-serif';
+hackMenu.style.border = '2px solid red';
+hackMenu.style.zIndex = '1000';
+hackMenu.style.width = '300px';
+hackMenu.style.cursor = 'move';
+hackMenu.innerHTML = `
+  <h2 style="text-align:center; color:red;">Hack Menu</h2>
+  <button id="autoAccount" style="display: block; margin: 10px auto; padding: 10px; background-color: red; color: white; border: none;">Auto Account Create</button>
+  <button id="robloxHacked" style="display: block; margin: 10px auto; padding: 10px; background-color: red; color: white; border: none;">Roblox Hacked Only for you visible</button>
+  <button id="passwordGuesser" style="display: block; margin: 10px auto; padding: 10px; background-color: red; color: white; border: none;">Account Password Guesser</button>
+  <button id="captchaBypass" style="display: block; margin: 10px auto; padding: 10px; background-color: red; color: white; border: none;">Captcha Bypass</button>
+`;
+
+// Append the menu to the body
+document.body.appendChild(hackMenu);
+
+// Make the hack menu draggable
+let isDragging = false;
+let offsetX, offsetY;
+
+hackMenu.onmousedown = function(event) {
+  isDragging = true;
+  offsetX = event.clientX - hackMenu.offsetLeft;
+  offsetY = event.clientY - hackMenu.offsetTop;
+  hackMenu.style.cursor = 'grabbing';
+};
+
+document.onmousemove = function(event) {
+  if (isDragging) {
+    hackMenu.style.left = (event.clientX - offsetX) + 'px';
+    hackMenu.style.top = (event.clientY - offsetY) + 'px';
+  }
+};
+
+document.onmouseup = function() {
+  isDragging = false;
+  hackMenu.style.cursor = 'move';
+};
+
+// Auto Account Create Button Functionality (Prank)
+document.getElementById('autoAccount').onclick = function() {
+  alert("Auto Account Create Activated!\nCreating accounts with random letters and numbers...");
+  let accounts = [];
+  for (let i = 0; i < 5; i++) {
+    let randomAccount = Math.random().toString(36).substring(2, 12);
+    accounts.push(randomAccount);
+  }
+  alert("Fake accounts created: \n" + accounts.join('\n'));
+};
+
+// Roblox Hacked Button Functionality (Prank)
+document.getElementById('robloxHacked').onclick = function() {
+  alert("Roblox is hacked, only visible to you!");
+  
+  // Create a hacked-looking overlay
+  let hackedOverlay = document.createElement('div');
+  hackedOverlay.style.position = 'fixed';
+  hackedOverlay.style.top = '0';
+  hackedOverlay.style.left = '0';
+  hackedOverlay.style.width = '100%';
+  hackedOverlay.style.height = '100%';
+  hackedOverlay.style.backgroundColor = 'red';
+  hackedOverlay.style.zIndex = '9999';
+  hackedOverlay.style.color = 'white';
+  hackedOverlay.style.fontSize = '24px';
+  hackedOverlay.style.textAlign = 'center';
+  hackedOverlay.style.paddingTop = '20%';
+  hackedOverlay.innerHTML = `
+    <h1>Roblox Hacked!</h1>
+    <p>Corrupted Text Appearing and Disappearing...</p>
+  `;
+
+  // Add corrupted text effect
+  function createCorruptedText() {
+    let corruptedText = document.createElement('div');
+    corruptedText.style.position = 'absolute';
+    corruptedText.style.left = Math.random() * 90 + '%';
+    corruptedText.style.top = Math.random() * 90 + '%';
+    corruptedText.style.color = 'black';
+    corruptedText.style.fontSize = Math.random() * 20 + 20 + 'px';
+    corruptedText.style.opacity = Math.random();
+    corruptedText.style.transform = 'rotate(' + (Math.random() * 360) + 'deg)';
+    corruptedText.innerHTML = '!!!error###@@';
+
+    hackedOverlay.appendChild(corruptedText);
+    setTimeout(() => corruptedText.remove(), Math.random() * 2000 + 500);
+  }
+
+  let corruptedTextInterval = setInterval(createCorruptedText, 500);
+
+  function createProfileButton() {
+    let button = document.createElement('button');
+    button.innerHTML = `Profile Link`;
+    button.style.display = 'block';
+    button.style.margin = '20px auto';
+    button.style.padding = '10px';
+    button.style.backgroundColor = 'black';
+    button.style.color = 'white';
+    button.style.border = 'none';
+    button.onclick = function() {
+      window.location.href = 'https://www.roblox.com/users/4810659207/profile';
+    };
+
+    hackedOverlay.appendChild(button);
+    setTimeout(() => button.remove(), Math.random() * 3000 + 1000);
+  }
+
+  let buttonInterval = setInterval(createProfileButton, 1000);
+
+  document.body.appendChild(hackedOverlay);
+
+  setTimeout(() => {
+    clearInterval(corruptedTextInterval);
+    clearInterval(buttonInterval);
+  }, 10000);
+};
+
+// Account Password Guesser Button (Prank)
+document.getElementById('passwordGuesser').onclick = function() {
+  let username = prompt("Enter the account username to guess passwords for:");
+  if (!username) return;
+
+  let base1 = username.substring(0, 6);
+  let base2 = username.substring(6);
+
+  let guesses = [
+    base1 + '123',
+    base2 + '123',
+    base1 + '1234',
+    base2 + '1234',
+    base1 + '456',
+    base2 + '456',
+    base1 + '789',
+    base2 + '789',
+    base1 + base2 + '123',
+    base1 + base2 + '1234',
+    base2 + base1 + '123',
+    base2 + base1 + '1234',
+    base1 + 'password',
+    base2 + 'password',
+    base1 + base2 + '456'
+  ];
+
+  alert("Attempting to guess passwords for: " + username);
+  
+  let guessedPasswords = "";
+  guesses.forEach(function(pass, index) {
+    guessedPasswords += "Guess " + (index + 1) + ": " + pass + "\n";
+  });
+
+  setTimeout(() => {
+    alert("Password guesses completed:\n\n" + guessedPasswords);
+  }, 2000);  // Simulate the time it would take to guess
+};
+
+// Captcha Bypass Button (with simulation)
+document.getElementById('captchaBypass').onclick = function() {
+  // Create a fake captcha overlay
+  let captchaOverlay = document.createElement('div');
+  captchaOverlay.style.position = 'fixed';
+  captchaOverlay.style.top = '0';
+  captchaOverlay.style.left = '0';
+  captchaOverlay.style.width = '100%';
+  captchaOverlay.style.height = '100%';
+  captchaOverlay.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+  captchaOverlay.style.zIndex = '9999';
+  captchaOverlay.style.color = 'white';
+  captchaOverlay.style.fontSize = '24px';
+  captchaOverlay.style.textAlign = 'center';
+  captchaOverlay.style.paddingTop = '20%';
+  captchaOverlay.innerHTML = `
+    <h1>Please Solve the Captcha</h1>
+    <p style="color: yellow;">Click below to bypass!</p>
+    <button id="solveCaptcha" style="padding: 10px; background-color: green; color: white;">Bypass Captcha</button>
+  `;
+
+  document.body.appendChild(captchaOverlay);
+
+  // Bypass button functionality
+  document.getElementById('solveCaptcha').onclick = function() {
+    alert("Captcha successfully bypassed!");
+    captchaOverlay.remove(); // Remove the captcha overlay
+  };
+};
